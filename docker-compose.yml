@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    image: levatas-indexer
+    volumes:
+      - ./:/data/app
+    ports:
+      - 8000:8000
+    environment:
+      - APP_ENVIRONMENT=dev
+    command: |
+      gunicorn levatas_indexer.application:app
+        -w 2
+        --threads 2
+        -b 0.0.0.0:8000
+        --reload

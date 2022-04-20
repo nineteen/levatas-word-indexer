@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+from argparse import ArgumentParser
+import pathlib
+import sys
+
+PATH = pathlib.Path(__file__).parent.parent.resolve()
+sys.path.insert(0, str(PATH))
+
+from levatas_indexer import indexer
+
+
+def print_index(index):
+    for word, count in sorted(index.items(), key=lambda x: x[1]):
+        if word.isprintable():
+            print(word, count)
+
+
+def main():
+    parser = ArgumentParser()
+    parser.add_argument('url', help='The url you want to index')
+    parser.add_argument('word', help='The word you want the count for')
+    parser.add_argument('--print',
+                        action='store_true',
+                        default=False,
+                        help='Print all of the words indexed and their count')
+
+    args = parser.parse_args()
+    default_indexer = indexer.get_default_indexer()
+    result = indexer.index_html_documents(args.url, default_indexer)
+
+    if args.print:
+        print_index(result)
+
+    print(f'Count: {result.get(args.word, 0)}')
+
+
+if __name__ == '__main__':
+
+    main()

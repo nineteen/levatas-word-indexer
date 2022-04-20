@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "indexer"
+version = "0.1.0"
+description = ""
+authors = ["Anthony LoBono"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.27.1"
+beautifulsoup4 = "^4.11.1"
+Flask = "^2.1.1"
+validators = "^0.18.2"
+gunicorn = "^20.1.0"
+nltk = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.13.5"
+pytest = "^7.1.1"
+mypy = "^0.942"
+types-requests = "^2.27.19"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
